@@ -39,7 +39,9 @@ class User < ApplicationRecord
   validates :uid, uniqueness: { scope: :provider }
 
   before_validation :init_uid
-
+  has_many :categories, dependent: :restrict_with_exception
+  has_many :comments, dependent: :restrict_with_exception
+  has_many :user_posts, dependent: :restrict_with_exception
   def full_name
     return username if first_name.blank?
 
